@@ -26,6 +26,8 @@ class square {
     }
     rect(x, y, s, s);
     fill(255);
-    text(total,x+45,y+55);
+    textAlign(CENTER, CENTER);
+    textFont(header, 30);
+    text(total,x+50,y+50);
   }
 }
