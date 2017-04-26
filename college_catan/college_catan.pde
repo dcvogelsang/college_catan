@@ -5,24 +5,21 @@ final int pause_screen = 2; //pause screen with instructions for during game
 final int game_screen = 3; //screen for game
 final int transition_screen = 4; //screen for between players
 final int end_screen = 5; //for game results and restart game
-int state = main_screen; //set beginning state to main menu
+int state = game_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
 
+//Board
 board b;
 
-Competetors compete;
+Competitors compete;
 String[] names;
 
 void setup() {
-//<<<<<<< HEAD
-  //size(400,400); //test size!  
-//=======
   size(700,700); //is this size ok?  
   
   
   b = new board();
   names = new String[1];
-  compete = new Competetors(names);
-  b.display();
+  compete = new Competitors(names);
 }
 
 
@@ -69,15 +66,14 @@ void showPause() {
 }
 
 //everything for actual game play
-void showGame() {
-//alex put your board stuff here?  
+void showGame() { 
   
   b.display();
   if(mousePressed){
     if(b.correctX() && b.correctY()){
       println("true"); 
       rectMode(CENTER);
-      rect(round(mouseX/100)*100, round(mouseY/100)*100, 30, 30);
+      rect((round((mouseX + 49)/100)*100), round((mouseY + 49)/100)*100, 30, 30);
       rectMode(CORNER);
     }
     else
