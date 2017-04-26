@@ -2,8 +2,9 @@
 
 class Player{
   String name;
-  //ArrayList< > resources;
-  ArrayList<settlement> built;
+  //ArrayList< > resources;//list of resources owned by Player
+  ArrayList<settlement> built;//list of settlements owned by Player
+  //ArrayList<road> bRoad;//list of roads owned by Player
   
   Player(String n){
     name = n;
@@ -15,12 +16,17 @@ class Player{
   void turn(){
     
     if(mousePressed){
-      if(b.correctX() && b.correctY()){
-        this.build();
+      switch(key){
+        case '1':
+          if(b.correctX() && b.correctY()){//build settlement
+            this.build(1);
+          }
+          break;
+        case '3':
+          break;
       }
     }
     
-    this.display();
   }
   
   void display(){//displays the player's objects and resources owned
@@ -30,8 +36,12 @@ class Player{
     
   }
   
-  void build(){
-    built.add(new settlement(1, (round((mouseX + 49)/100)*100), round((mouseY + 49)/100)*100)); 
+  void build(int type){
+    //build settlement
+    if (type == 1){
+      built.add(new settlement(1, (round((mouseX + 49)/100)*100), round((mouseY + 49)/100)*100)); 
+    }
+    
     
   }
   
