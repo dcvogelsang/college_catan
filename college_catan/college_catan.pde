@@ -58,15 +58,7 @@ void setup() {
 
 void draw() {
   //background(100);
-  
-  //music
-  //if(key == 'm'){
-  //  player.pause();
-  //}
-  //else{
-  // player.play(); 
-  // player.loop(); 
-  //}
+
   
   //handle screens here
   switch (state) {
@@ -160,4 +152,19 @@ void mousePressed() {
   if (exit.isOver()) {
     exit();  
   }
+}
+
+//method for extraneous key Presses
+void keyPressed(){
+  
+  //music
+  if(key == 'm'){
+    if(player.isPlaying()){
+      player.pause();
+    }
+    else{ 
+     player.loop(); 
+    }  
+  }
+  
 }
