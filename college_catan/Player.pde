@@ -3,7 +3,7 @@
 class Player{
   String name;
   //ArrayList< > resources;
-  ArrayList< > built;
+  //ArrayList< > built;
   
   Player(String n){
     name = n;
@@ -16,15 +16,15 @@ class Player{
     this.build();
     
     
-    this.display();
+    //this.display();
   }
   
+  /*
   void display(){//displays the player's objects and resources owned
     for 
+   
     
-    
-    
-  }
+  }*/
   
   void build(){
     if(mousePressed){
