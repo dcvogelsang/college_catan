@@ -1,5 +1,6 @@
 //font
-PFont f1; //"Bernard"
+PFont header; //Roboto Light for headers
+PFont reg; //Roboto Thin for everything else
 
 //color array for our colors
 public color[] colorArray = {color(112,174,227)};
@@ -12,7 +13,7 @@ final int pause_screen = 2; //pause screen with instructions for during game
 final int game_screen = 3; //screen for game
 final int transition_screen = 4; //screen for between players
 final int end_screen = 5; //for game results and restart game
-int state = game_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
+int state = main_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
 
 //Board
 board b;
@@ -27,16 +28,17 @@ Button exit; //exit game button
 
 void setup() {
   size(900,800); //try not to change the size anymore
-  f1 = createFont("Bernard MT Condensed", 20);
-  textFont(f1);
+  header = loadFont("Roboto-Light-48.vlw");
+  reg = loadFont("Roboto-Thin-48.vlw");
+  textFont(header, 48);
   
   b = new board();
   names = new String[1];
   compete = new Competitors(names);
   
   //button setups
-  start = new Button(colorArray[0], width/2, height/3 * 2, 160, 100, "New Game", 35);
-  exit = new Button(colorArray[0], width/2, height /3 * 2.5, 160, 100, "Exit Game", 35);
+  start = new Button(colorArray[0], width/2, height/3 * 2, 170, 90, "New Game", 32);
+  exit = new Button(colorArray[0], width/2, height /3 * 2.5, 170, 90, "Exit Game", 32);
   
 }
 
@@ -79,12 +81,13 @@ void showMain() {
   
   textAlign(CENTER, CENTER);
   fill(colorArray[0]);
-  textSize(50);
+  textFont(header, 50);
   text("COLLEGE CATAN", width/2, height/4);
   fill(color(0));
-  textSize(38);
+  textFont(reg, 38);
   text("a collegiate version of\nSettlers of Catan", width/2, height/4 + 150);
   
+  textFont(reg);
   start.changeVisibility(true);
   start.update();
   exit.changeVisibility(true);

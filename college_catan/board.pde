@@ -5,7 +5,7 @@ class board{
   color c2=color(0, 255, 0);
   color c3=color(0, 0, 255);
   color c4=color(0, 0, 0);
-  PFont f1;
+  PFont header;
   
   board(){
     String[] types= new String[5];
