@@ -19,7 +19,6 @@ class Player{
     this.display();
   }
   
-  /*
   void display(){//displays the player's objects and resources owned
     //for 
     
