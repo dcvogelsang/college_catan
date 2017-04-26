@@ -8,8 +8,6 @@ class board{
   PFont f1;
   
   board(){
-    f1 = createFont("Bernard MT Condensed", 20);
-    textFont(f1);
     String[] types= new String[5];
     types[0]="Textbook";
     types[1]="Food";

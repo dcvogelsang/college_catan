@@ -1,3 +1,10 @@
+//font
+PFont f1; //"Bernard"
+
+//color array for our colors
+public color[] colorArray = {color(112,174,227)};
+//key = {[0]background blue}
+
 //setup for screens
 final int main_screen = 0; //main menu screen, opens upon run
 final int new_screen = 1; //new game with player setup, navigate from main menu
@@ -10,21 +17,31 @@ int state = game_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BA
 //Board
 board b;
 
+//players
 Competitors compete;
 String[] names;
 
+//buttons
+Button start; //start game button
+Button exit; //exit game button
+
 void setup() {
-  size(700,700); //is this size ok?  
-  
+  size(900,800); //try not to change the size anymore
+  f1 = createFont("Bernard MT Condensed", 20);
+  textFont(f1);
   
   b = new board();
   names = new String[1];
   compete = new Competitors(names);
+  
+  //button setups
+  //start = new Button(colorArray[0], 
+  
 }
 
 
 void draw() {
-  background(100);
+  //background(100);
   
   //handle screens here
   switch (state) {
@@ -52,6 +69,8 @@ void draw() {
 
 //everything for main menu
 void showMain() {
+  background(color(255));
+  
 //new game or exit here  
 }
 
@@ -67,7 +86,7 @@ void showPause() {
 
 //everything for actual game play
 void showGame() { 
-  
+  background(colorArray[0]);
   b.display();
   if(mousePressed){
     if(b.correctX() && b.correctY()){
