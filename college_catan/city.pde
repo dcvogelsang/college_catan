@@ -1,9 +1,9 @@
-class settlement{
+class city{
  int level;//level = 1 is dorm, level = 2 is apartment 
  float x, y; //x and y coordinates for center of settlement
  
   
-  settlement(int l, float _x, float _y){
+  city(int l, float _x, float _y){
    level = l; 
     x = _x;
     y = _y;
