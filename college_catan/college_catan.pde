@@ -26,6 +26,13 @@ String[] names;
 Button start; //start new game button
 Button exit; //exit game button
 
+//music
+// Import Minim for sound 
+import ddf.minim.*;
+AudioPlayer player;
+Minim minim;//audio context
+
+
 void setup() {
   size(900,800); //try not to change the size anymore
   header = loadFont("Roboto-Light-48.vlw");
@@ -40,11 +47,26 @@ void setup() {
   start = new Button(colorArray[0], width/2, height/3 * 2, 170, 90, "New Game", 32);
   exit = new Button(colorArray[0], width/2, height /3 * 2.5, 170, 90, "Exit Game", 32);
   
+  //music
+  // Play music 
+  minim = new Minim(this);
+  player = minim.loadFile("SpringDay.mp3");
+  player.play();
+  player.loop();
 }
 
 
 void draw() {
   //background(100);
+  
+  //music
+  //if(key == 'm'){
+  //  player.pause();
+  //}
+  //else{
+  // player.play(); 
+  // player.loop(); 
+  //}
   
   //handle screens here
   switch (state) {
