@@ -12,7 +12,7 @@ final int pause_screen = 2; //pause screen with instructions for during game
 final int game_screen = 3; //screen for game
 final int transition_screen = 4; //screen for between players
 final int end_screen = 5; //for game results and restart game
-int state = game_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
+int state = main_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
 
 //Board
 board b;
@@ -22,7 +22,7 @@ Competitors compete;
 String[] names;
 
 //buttons
-Button start; //start game button
+Button start; //start new game button
 Button exit; //exit game button
 
 void setup() {
@@ -35,7 +35,8 @@ void setup() {
   compete = new Competitors(names);
   
   //button setups
-  //start = new Button(colorArray[0], 
+  start = new Button(colorArray[0], width/2, height/3 * 2, 160, 100, "New Game", 35);
+  exit = new Button(colorArray[0], width/2, height /3 * 2.5, 160, 100, "Exit Game", 35);
   
 }
 
@@ -69,14 +70,33 @@ void draw() {
 
 //everything for main menu
 void showMain() {
-  background(color(255));
+  background(color(240));
   
-//new game or exit here  
+  strokeWeight(3);
+  stroke(colorArray[0]);
+  fill(color(255));
+  rect(width/2, height/2, 700, 700);
+  
+  textAlign(CENTER, CENTER);
+  fill(colorArray[0]);
+  textSize(50);
+  text("COLLEGE CATAN", width/2, height/4);
+  fill(color(0));
+  textSize(38);
+  text("a collegiate version of\nSettlers of Catan", width/2, height/4 + 150);
+  
+  start.changeVisibility(true);
+  start.update();
+  exit.changeVisibility(true);
+  exit.update();
+   
 }
 
 //everything for new game menu
 void showNew() {
-//player setup here  
+  background(color(240));
+  
+  //player setup here
 }
 
 //everything for pause screen
@@ -109,5 +129,16 @@ void showTransition() {
 //everythng for the end screen
 void showEnd() {
 //results and option to restart or exit  
-//>>>>>>> origin/master
+
+}
+
+
+//method for button functions
+void mousePressed() {
+  if (start.isOver()) {
+    state = new_screen;
+  }
+  if (exit.isOver()) {
+    exit();  
+  }
 }

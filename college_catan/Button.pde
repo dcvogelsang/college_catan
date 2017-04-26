@@ -1,7 +1,6 @@
 //class to create buttons
 //note: sets rectMode to CENTER
 //note: sets textAlign to CENTER, CENTER
-//note: sets textSize to 16
 
 class Button {
   color buttonColor; //button's color
@@ -9,18 +8,20 @@ class Button {
   float buttonY; //button's y position
   float buttonWidth; //button's width
   float buttonHeight; //button's height
+  int textSize; //button's text size
   String buttonText; //button's text
   boolean buttonOver = false; //boolean to check if mouse is over button
   boolean visible = false; //boolean to check if button is displayed on screen
   
   //constructor for button class
-  Button(color bC, float bX, float bY, float bW, float bH, String bT) {
+  Button(color bC, float bX, float bY, float bW, float bH, String bT, int txt) {
     buttonColor = bC;
     buttonX = bX;
     buttonY = bY;
     buttonWidth = bW;
     buttonHeight = bH;
     buttonText = bT;
+    textSize = txt;
   }
   
   //method to display button
@@ -42,7 +43,7 @@ class Button {
       fill(0); //if mouse is not over button text is black
     }
     textAlign(CENTER, CENTER); //align text to display center, center
-    textSize(16); //text size is 16
+    textSize(textSize);
     text(buttonText, buttonX, buttonY); //position text in the center of button
   }
  
