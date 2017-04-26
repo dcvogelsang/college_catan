@@ -7,11 +7,22 @@ final int transition_screen = 4; //screen for between players
 final int end_screen = 5; //for game results and restart game
 int state = main_screen; //set beginning state to main menu
 
+board b;
+
+Competetors compete;
+String[] names;
+
 void setup() {
-<<<<<<< HEAD
-  size(400,400); //test size!  
-=======
+//<<<<<<< HEAD
+  //size(400,400); //test size!  
+//=======
   size(700,700); //is this size ok?  
+  
+  
+  b = new board();
+  names = new String[1];
+  compete = new Competetors(names);
+  b.display();
 }
 
 
@@ -60,7 +71,20 @@ void showPause() {
 //everything for actual game play
 void showGame() {
 //alex put your board stuff here?  
+  
+  b.display();
+  if(mousePressed){
+    if(b.correctX() && b.correctY()){
+      println("true"); 
+      rectMode(CENTER);
+      rect(round(mouseX/100)*100, round(mouseY/100)*100, 30, 30);
+      rectMode(CORNER);
+    }
+    else
+      println("false");
+  }
 }
+
 
 //everything for transition screen between players
 void showTransition() {
@@ -70,5 +94,5 @@ void showTransition() {
 //everythng for the end screen
 void showEnd() {
 //results and option to restart or exit  
->>>>>>> origin/master
+//>>>>>>> origin/master
 }
