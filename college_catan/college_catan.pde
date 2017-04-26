@@ -12,7 +12,7 @@ final int pause_screen = 2; //pause screen with instructions for during game
 final int game_screen = 3; //screen for game
 final int transition_screen = 4; //screen for between players
 final int end_screen = 5; //for game results and restart game
-int state = main_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
+int state = game_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
 
 //Board
 board b;

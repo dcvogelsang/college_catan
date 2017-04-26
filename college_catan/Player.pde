@@ -3,38 +3,35 @@
 class Player{
   String name;
   //ArrayList< > resources;
-  //ArrayList< > built;
+  ArrayList<settlement> built;
   
   Player(String n){
     name = n;
     //resources = ;
-    //build = ;
+    built = new ArrayList<settlement>();
    
   }
   
   void turn(){
-    this.build();
     
+    if(mousePressed){
+      if(b.correctX() && b.correctY()){
+        this.build();
+      }
+    }
     
     this.display();
   }
   
   void display(){//displays the player's objects and resources owned
-    //for 
-    
-    
+    for(settlement s: built){
+      s.display();
+    }
     
   }
   
   void build(){
-    if(mousePressed){
-      if(b.correctX() && b.correctY()){
-        rectMode(CENTER);
-        rect((round((mouseX + 49)/100)*100), round((mouseY + 49)/100)*100, 30, 30);
-        
-      }
-      
-    }
+    built.add(new settlement(1, (round((mouseX + 49)/100)*100), round((mouseY + 49)/100)*100)); 
     
   }
   
