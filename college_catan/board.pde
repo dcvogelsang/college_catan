@@ -27,6 +27,7 @@ class board{
   }
   
   void display(){
+    rectMode(CORNER);
     for(square a : Squares) {
       a.display();
     }

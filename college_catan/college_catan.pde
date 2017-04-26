@@ -107,17 +107,9 @@ void showPause() {
 //everything for actual game play
 void showGame() { 
   background(colorArray[0]);
+  
   b.display();
-  if(mousePressed){
-    if(b.correctX() && b.correctY()){
-      println("true"); 
-      rectMode(CENTER);
-      rect((round((mouseX + 49)/100)*100), round((mouseY + 49)/100)*100, 30, 30);
-      rectMode(CORNER);
-    }
-    else
-      println("false");
-  }
+  compete.update();
 }
 
 
