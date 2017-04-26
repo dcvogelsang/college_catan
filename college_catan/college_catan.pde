@@ -94,6 +94,8 @@ void showMain() {
 
 //everything for new game menu
 void showNew() {
+  start.changeVisibility(false);
+  exit.changeVisibility(false);
   background(color(240));
   
   //player setup here

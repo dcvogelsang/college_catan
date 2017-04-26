@@ -16,15 +16,16 @@ class Player{
     this.build();
     
     
-    //this.display();
+    this.display();
   }
   
   /*
   void display(){//displays the player's objects and resources owned
-    for 
-   
+    //for 
     
-  }*/
+    
+    
+  }
   
   void build(){
     if(mousePressed){
