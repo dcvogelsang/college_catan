@@ -20,7 +20,7 @@ final int pause_screen = 2; //pause screen with instructions during game
 final int game_screen = 3; //screen for game
 final int transition_screen = 4; //screen for between players
 final int end_screen = 5; //for game results and restart game
-int state = main_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
+int state = game_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
 
 boolean setup_done = false; //will be changed to true once setup is done
 
@@ -43,6 +43,13 @@ Button instr_game; //instructions button from game screen
 Button next_turn; //next turn button from game screen
 
 RadioButton numPlayers; //radio button list for number of players
+
+//music
+// Import Minim for sound 
+import ddf.minim.*;
+AudioPlayer player;
+Minim minim;//audio context
+
 
 void setup() {
   size(900,800); //try not to change the size anymore
@@ -88,11 +95,18 @@ void setup() {
     t.setColorForeground(color(255));
   }
   
+  //music
+  // Play music 
+  minim = new Minim(this);
+  player = minim.loadFile("SpringDay.mp3");
+  player.play();
+  player.loop();
 }
 
 
 void draw() {
   background(color(240));
+
   
   //handle screens here
   switch (state) {
@@ -308,5 +322,19 @@ void mousePressed() {
   }
   if (next_turn.isOver()) {
     state = transition_screen;  
+  }
+}
+
+//method for extraneous key Presses
+void keyPressed(){
+  
+  //music
+  if(key == 'm'){
+    if(player.isPlaying()){
+      player.pause();
+    }
+    else{ 
+     player.loop(); 
+    }  
   }
 }

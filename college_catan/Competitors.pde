@@ -14,7 +14,9 @@ class Competitors{
   void update(){
     
     cPlayer.turn();
-    
+    for(Player p: Players){
+      p.display(); 
+    }
     
   }
   
