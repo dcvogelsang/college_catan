@@ -4,12 +4,13 @@ class square {
   String type;
   int total;
 
-  square(float _x, float _y, float _s, String _t, int r1, int r2) {
+  square(float _x, float _y, 
+    float _s, String _t, int _total) {
     x = _x;
     y = _y;
     s = _s;
     type=_t;
-    total=r1+r2;
+    total=_total;
   }
 
   void display() {
@@ -26,8 +27,6 @@ class square {
     }
     rect(x, y, s, s);
     fill(255);
-    textAlign(CENTER, CENTER);
-    textFont(header, 30);
-    text(total,x+50,y+50);
+    text(total,x+45,y+55);
   }
 }

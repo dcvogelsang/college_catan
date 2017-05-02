@@ -26,11 +26,12 @@ boolean setup_done = false; //will be changed to true once setup is done
 
 //Board
 board b;
+IntList numbers;
+StringList boardtype;
 
 //players
 Competitors compete;
 String[] names;
-
 
 //buttons
 Button start; //start new game button
