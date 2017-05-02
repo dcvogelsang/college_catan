@@ -567,10 +567,10 @@ int assignColors(float x) {
   if (x == 0) {
     return 3;
   }
-  else if (x == 1) {
+  if (x == 1) {
     return 4;  
   }
-  else if (x == 2) {
+  if (x == 2) {
     return 5;  
   }
   else {
@@ -630,6 +630,7 @@ void mousePressed() {
       playerColors[1] = colorArray[assignColors(player2color.getValue())];
       playerColors[2] = colorArray[assignColors(player3color.getValue())];
       playerColors[3] = colorArray[assignColors(player4color.getValue())];
+      println(playerColors);
     }
     state = game_screen;  
   }

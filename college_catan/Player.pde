@@ -1,5 +1,3 @@
-
-
 class Player{
   String name;
   color player_color;
@@ -55,7 +53,7 @@ class Player{
           testY = round((mouseY + 49)/100)*100;
           if(b.correctX() && b.correctY()){
             if(!bExist(testX, testY)){//test whether or not settlement can exist here
-              settlement tempSettle = new settlement(1, testX, testY);
+              settlement tempSettle = new settlement(1, testX, testY, player_color);
               built.add(tempSettle); 
               points += 1;
               for(int i = 0; i < tempSettle.supplies.size(); i++){
@@ -73,7 +71,7 @@ class Player{
               for(settlement s: built){
                 if(testX == s.x && testY == s.y){
                   if(!cExist(testX, testY)){//test whether or not city can exist here
-                    bCity.add(new city(2, testX, testY)); 
+                    bCity.add(new city(2, testX, testY, player_color)); 
                     points += 1;
                   }
                 }
@@ -87,14 +85,14 @@ class Player{
           testX = round((mouseX + 49)/100)*100;
           testY = round((mouseY/100)*100) + 50;
           if(!rExist(testX, testY)){//test whether or not road can exist here
-            bRoad.add(new road(1, testX, testY));
+            bRoad.add(new road(1, testX, testY, player_color));
           }
         }
        if (!b.correctX() && b.correctY()){ //vertical
           testX = round((mouseX/100)*100 + 50);
           testY = round((mouseY + 49)/100)*100;
           if(!rExist(testX, testY)){//test whether or not road can exist here
-            bRoad.add(new road(2, testX, testY));
+            bRoad.add(new road(2, testX, testY, player_color));
           }
         }
       break;

@@ -1,4 +1,4 @@
-class board{
+class board {
   
   square[] Squares = new square[25];
   color c1=color(255, 0, 0);

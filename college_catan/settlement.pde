@@ -2,12 +2,14 @@ class settlement{
  int level;//level = 1 is dorm, level = 2 is apartment 
  float x, y; //x and y coordinates for center of settlement
  ArrayList<resource> supplies;
+ color c;
  
   
-  settlement(int l, float _x, float _y){
+  settlement(int l, float _x, float _y, color _c){
    level = l; 
     x = _x;
     y = _y;
+    c = _c;
     supplies = new ArrayList<resource>();
     determineSupplies();
   }
@@ -16,10 +18,10 @@ class settlement{
     rectMode(CENTER);
     rect(x, y, 30, 30); 
     if(level == 2){//upgraded visual for cities
-      fill(0);
+      fill(c);
       ellipse(x, y, 10, 10);
     }
-    fill(255);
+    fill(color(c));
   }
   
   //populate the supplies array with corresponding resource

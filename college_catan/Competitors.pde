@@ -1,4 +1,3 @@
-
 class Competitors{
   ArrayList<Player> Players =new ArrayList<Player>();
   Player cPlayer;//current Player
