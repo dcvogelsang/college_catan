@@ -28,6 +28,8 @@ class board{
   
   void display(){
     rectMode(CORNER);
+    strokeWeight(1);
+    stroke(color(0));
     for(square a : Squares) {
       a.display();
     }

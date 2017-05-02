@@ -2,6 +2,7 @@
 
 class Player{
   String name;
+  color player_color;
   ArrayList<resource> resources;//list of resources owned by Player
   ArrayList<settlement> built;//list of settlements owned by Player
   ArrayList<road> bRoad;//list of roads owned by Player
@@ -10,8 +11,9 @@ class Player{
   int points;
   
   
-  Player(String n){
+  Player(String n, color c){
     //mClick = false;
+    player_color = c;
     name = n;
     resources = new ArrayList<resource>();
     built = new ArrayList<settlement>();

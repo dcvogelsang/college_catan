@@ -30,6 +30,7 @@ board b;
 //players
 Competitors compete;
 String[] names;
+color[] playerColors;
 
 
 //buttons
@@ -68,7 +69,8 @@ void setup() {
   
   b = new board();
   names = new String[4];
-  compete = new Competitors(names);
+  playerColors = new color[4];
+  compete = new Competitors(names, playerColors);
   
   //button setups
   start = new Button(colorArray[0], width/2, height/3 * 2, 180, 90, "New Game", 32);
@@ -558,6 +560,22 @@ void showEnd() {
 
 }
 
+//method for assigning player colors
+int assignColors(float x) {
+  if (x == 0) {
+    return 3;
+  }
+  else if (x == 1) {
+    return 4;  
+  }
+  else if (x == 2) {
+    return 5;  
+  }
+  else {
+    return 6;  
+  }
+}
+
 
 //method for button functions
 void mousePressed() {
@@ -585,21 +603,31 @@ void mousePressed() {
     setup_done = true;
     if (numPlayers.getValue() == 0) {
       names[0] = player1.getText();
+      playerColors[0] = colorArray[assignColors(player1color.getValue())];
     }
     if (numPlayers.getValue() == 1) {
       names[0] = player1.getText();
       names[1] = player2.getText();
+      playerColors[0] = colorArray[assignColors(player1color.getValue())];
+      playerColors[1] = colorArray[assignColors(player2color.getValue())];
     }
     if (numPlayers.getValue() == 2) {
       names[0] = player1.getText();
       names[1] = player2.getText();
       names[2] = player3.getText();
+      playerColors[0] = colorArray[assignColors(player1color.getValue())];
+      playerColors[1] = colorArray[assignColors(player2color.getValue())];
+      playerColors[2] = colorArray[assignColors(player3color.getValue())];
     }
     if (numPlayers.getValue() == 3) {
       names[0] = player1.getText();
       names[1] = player2.getText();
       names[2] = player3.getText();
       names[3] = player4.getText();
+      playerColors[0] = colorArray[assignColors(player1color.getValue())];
+      playerColors[1] = colorArray[assignColors(player2color.getValue())];
+      playerColors[2] = colorArray[assignColors(player3color.getValue())];
+      playerColors[3] = colorArray[assignColors(player4color.getValue())];
     }
     state = game_screen;  
   }
