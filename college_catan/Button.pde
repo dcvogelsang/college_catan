@@ -28,8 +28,8 @@ class Button {
   void update() {
     isOver();
     rectMode(CENTER); //set rectMode to center
-    if (buttonOver) { //if mouse is over button make it blue
-      fill(colorArray[1]);
+    if (buttonOver) { //if mouse is over button make it black
+      fill(0);
     }
     else {
       fill(buttonColor); //if mouse is not over button use specified color
@@ -37,10 +37,10 @@ class Button {
     noStroke();
     rect(buttonX, buttonY, buttonWidth, buttonHeight, 8); //draw rectangular button with round corners
     if (buttonOver) { //if mouse is over button text is white
-      fill(color(255));
+      fill(255);
     }
     else {
-      fill(colorArray[1]); //if mouse is not over button text is black
+      fill(0); //if mouse is not over button text is black
     }
     textAlign(CENTER, CENTER); //align text to display center, center
     textSize(textSize);

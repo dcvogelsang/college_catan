@@ -31,6 +31,10 @@ class Player{
     for(city c: bCity){
       c.display();
     }
+    for(int i = 0; i < resources.size(); i++){
+      resource re = resources.get(i);
+      re.display(i);
+    }
     
   }
   
@@ -49,9 +53,12 @@ class Player{
           testY = round((mouseY + 49)/100)*100;
           if(b.correctX() && b.correctY()){
             if(!bExist(testX, testY)){//test whether or not settlement can exist here
-              built.add(new settlement(1, testX, testY)); 
+              settlement tempSettle = new settlement(1, testX, testY);
+              built.add(tempSettle); 
               points += 1;
-              println("settlement: ", built.size(), "  println in Player/build");
+              for(int i = 0; i < tempSettle.supplies.size(); i++){
+                resources.add(tempSettle.supplies.get(i));
+              }
             }
           }
           //mClick = true;
@@ -66,7 +73,6 @@ class Player{
                   if(!cExist(testX, testY)){//test whether or not city can exist here
                     bCity.add(new city(2, testX, testY)); 
                     points += 1;
-                    println("city: ", bCity.size(), "  println in Player/build");
                   }
                 }
               }  
@@ -80,7 +86,6 @@ class Player{
           testY = round((mouseY/100)*100) + 50;
           if(!rExist(testX, testY)){//test whether or not road can exist here
             bRoad.add(new road(1, testX, testY));
-            println("road: ", bRoad.size(), "  println in Player/build");
           }
         }
        if (!b.correctX() && b.correctY()){ //vertical
@@ -88,7 +93,6 @@ class Player{
           testY = round((mouseY + 49)/100)*100;
           if(!rExist(testX, testY)){//test whether or not road can exist here
             bRoad.add(new road(2, testX, testY));
-            println("road: ", bRoad.size(), "  println in Player/build");
           }
         }
       break;

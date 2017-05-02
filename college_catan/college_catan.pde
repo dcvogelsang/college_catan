@@ -10,8 +10,8 @@ PFont reg; //Roboto Thin for everything else
 PImage logo;
 
 //color array for our colors
-public color[] colorArray = {color(240,44,24), color(17,37,144), color(255,210,108), color(255,63,53), color(0,166,224), color(255,144,67), color(255)};
-//key = {[0]catan red, [1]catan blue, [2]catan yellow, [3]user red, [4]user blue, [5]user orange, [6]user white}
+public color[] colorArray = {color(240,44,24), color(17,37,144), color(255,210,108)};
+//key = {[0]catan red, [1]catan blue, [2]catan yellow}
 
 //setup for screens
 final int main_screen = 0; //main menu screen, opens upon run
@@ -20,7 +20,7 @@ final int pause_screen = 2; //pause screen with instructions during game
 final int game_screen = 3; //screen for game
 final int transition_screen = 4; //screen for between players
 final int end_screen = 5; //for game results and restart game
-int state = main_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
+int state = game_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
 
 boolean setup_done = false; //will be changed to true once setup is done
 
@@ -43,14 +43,6 @@ Button instr_game; //instructions button from game screen
 Button next_turn; //next turn button from game screen
 
 RadioButton numPlayers; //radio button list for number of players
-RadioButton player1color; //radio button list for player1 color
-RadioButton player2color; //radio button list for player2 color
-RadioButton player3color; //radio button list for player3 color
-RadioButton player4color; //radio button list for player4 color
-Textfield player1; //text field for player1
-Textfield player2; //text field for player2
-Textfield player3; //text field for player3
-Textfield player4; //text field for player4
 
 //music
 // Import Minim for sound 
@@ -67,7 +59,7 @@ void setup() {
   logo = loadImage("settlers.png");
   
   b = new board();
-  names = new String[4];
+  names = new String[1];
   compete = new Competitors(names);
   
   //button setups
@@ -82,229 +74,26 @@ void setup() {
   
    cp5 = new ControlP5(this);
    numPlayers = cp5.addRadioButton("Players")
+            .setId(1)
             .setNoneSelectedAllowed(false)
-            .setSize(160, 40)
+            .setSize(150, 50)
             .setSpacingColumn(0)
-            .setPosition(130, 130)
+            .setPosition(200, 120)
             .setItemsPerRow(4)
-            .setColorLabel(color(255))
-            .addItem("1 Player", 0)
-            .addItem("2 Players", 1)
-            .addItem("3 Players", 2)
-            .addItem("4 Players", 3);
+            .setColorLabel(colorArray[0])
+            .addItem("1 Player",0)
+            .addItem("2 Players",1)
+            .addItem("3 Players",2)
+            .addItem("4 Players",3);
   for (Toggle t:numPlayers.getItems()) {
     t.getCaptionLabel().align(CENTER,CENTER);
     t.getCaptionLabel().setFont(reg);
     t.getCaptionLabel().setSize(28);
-    t.setSize(160, 40);
-    t.setColorBackground(colorArray[0]);
-    t.setColorActive(colorArray[1]);
-    t.setColorForeground(colorArray[1]);
+    t.setSize(130, 40);
+    t.setColorBackground(color(200));
+    t.setColorActive(color(255));
+    t.setColorForeground(color(255));
   }
-  
-  player1 = cp5.addTextfield("Player 1")
-          .setPosition(130, 205)
-          .setSize(160, 40)
-          .setFont(reg)
-          .setAutoClear(false)
-          .setColorBackground(colorArray[0])
-          .setColor(colorArray[0])
-          .setColorValueLabel(color(255))
-          .setColorCaptionLabel(colorArray[1]);
-  player1.getCaptionLabel().setFont(reg);
-  player1.getCaptionLabel().setSize(28);
-  player1.getValueLabel().setFont(reg);
-  player1.getValueLabel().setSize(28);
-  
-  player1color = cp5.addRadioButton("Player 1 Color")
-            .setNoneSelectedAllowed(false)
-            .setSize(100, 40)
-            .setSpacingColumn(0)
-            .setPosition(370, 205)
-            .setItemsPerRow(4)
-            .setColorLabel(color(255))
-            .addItem("Red", 0)
-            .addItem("Blue", 1)
-            .addItem("Orange", 2)
-            .addItem("White", 3);
-  for (Toggle u:player1color.getItems()) {
-    u.getCaptionLabel().align(CENTER,CENTER);
-    u.getCaptionLabel().setFont(reg);
-    u.getCaptionLabel().setSize(24);
-    u.setSize(100, 40);
-    u.setColorBackground(colorArray[0]);
-    u.setColorActive(colorArray[1]);
-    u.setColorForeground(colorArray[1]);
-  }
-  player1color.getItem(0).setColorBackground(color(200));
-  player1color.getItem(0).setColorActive(colorArray[3]);
-  player1color.getItem(0).setColorForeground(colorArray[3]);
-  player1color.getItem(0).getCaptionLabel().setColor(colorArray[3]);
-  player1color.getItem(1).setColorBackground(color(200));
-  player1color.getItem(1).setColorActive(colorArray[4]);
-  player1color.getItem(1).setColorForeground(colorArray[4]);
-  player1color.getItem(1).getCaptionLabel().setColor(colorArray[4]);
-  player1color.getItem(2).setColorBackground(color(200));
-  player1color.getItem(2).setColorActive(colorArray[5]);
-  player1color.getItem(2).setColorForeground(colorArray[5]);
-  player1color.getItem(2).getCaptionLabel().setColor(colorArray[5]);
-  player1color.getItem(3).setColorBackground(color(200));
-  player1color.getItem(3).setColorActive(colorArray[6]);
-  player1color.getItem(3).setColorForeground(colorArray[6]);
-  player1color.getItem(3).getCaptionLabel().setColor(colorArray[6]);
-  
-  player2 = cp5.addTextfield("Player 2")
-          .setPosition(130, 295)
-          .setSize(160, 40)
-          .setFont(reg)
-          .setAutoClear(false)
-          .setColorBackground(colorArray[0])
-          .setColor(colorArray[0])
-          .setColorValueLabel(color(255))
-          .setColorCaptionLabel(colorArray[1]);
-  player2.getCaptionLabel().setFont(reg);
-  player2.getCaptionLabel().setSize(28);
-  player2.getValueLabel().setFont(reg);
-  player2.getValueLabel().setSize(28);
-  
-  player2color = cp5.addRadioButton("Player 2 Color")
-            .setNoneSelectedAllowed(false)
-            .setSize(100, 40)
-            .setSpacingColumn(0)
-            .setPosition(370, 295)
-            .setItemsPerRow(4)
-            .setColorLabel(color(255))
-            .addItem("R1", 0)
-            .addItem("B1", 1)
-            .addItem("O1", 2)
-            .addItem("W1", 3);
-  for (Toggle v:player2color.getItems()) {
-    v.getCaptionLabel().align(CENTER,CENTER);
-    v.getCaptionLabel().setFont(reg);
-    v.getCaptionLabel().setSize(24);
-    v.setSize(100, 40);
-    v.setColorBackground(colorArray[0]);
-    v.setColorActive(colorArray[1]);
-    v.setColorForeground(colorArray[1]);
-  }
-  player2color.getItem(0).setColorBackground(color(200));
-  player2color.getItem(0).setColorActive(colorArray[3]);
-  player2color.getItem(0).setColorForeground(colorArray[3]);
-  player2color.getItem(0).getCaptionLabel().setColor(colorArray[3]);
-  player2color.getItem(1).setColorBackground(color(200));
-  player2color.getItem(1).setColorActive(colorArray[4]);
-  player2color.getItem(1).setColorForeground(colorArray[4]);
-  player2color.getItem(1).getCaptionLabel().setColor(colorArray[4]);
-  player2color.getItem(2).setColorBackground(color(200));
-  player2color.getItem(2).setColorActive(colorArray[5]);
-  player2color.getItem(2).setColorForeground(colorArray[5]);
-  player2color.getItem(2).getCaptionLabel().setColor(colorArray[5]);
-  player2color.getItem(3).setColorBackground(color(200));
-  player2color.getItem(3).setColorActive(colorArray[6]);
-  player2color.getItem(3).setColorForeground(colorArray[6]);
-  player2color.getItem(3).getCaptionLabel().setColor(colorArray[6]);
-  
-  player3 = cp5.addTextfield("Player 3")
-          .setPosition(130, 385)
-          .setSize(160, 40)
-          .setFont(reg)
-          .setAutoClear(false)
-          .setColorBackground(colorArray[0])
-          .setColor(colorArray[0])
-          .setColorValueLabel(color(255))
-          .setColorCaptionLabel(colorArray[1]);
-  player3.getCaptionLabel().setFont(reg);
-  player3.getCaptionLabel().setSize(28);
-  player3.getValueLabel().setFont(reg);
-  player3.getValueLabel().setSize(28);
-  
-  player3color = cp5.addRadioButton("Player 3 Color")
-            .setNoneSelectedAllowed(false)
-            .setSize(100, 40)
-            .setSpacingColumn(0)
-            .setPosition(370, 385)
-            .setItemsPerRow(4)
-            .setColorLabel(color(255))
-            .addItem("R2", 0)
-            .addItem("B2", 1)
-            .addItem("O2", 2)
-            .addItem("W2", 3);
-  for (Toggle w:player3color.getItems()) {
-    w.getCaptionLabel().align(CENTER,CENTER);
-    w.getCaptionLabel().setFont(reg);
-    w.getCaptionLabel().setSize(24);
-    w.setSize(100, 40);
-    w.setColorBackground(colorArray[0]);
-    w.setColorActive(colorArray[1]);
-    w.setColorForeground(colorArray[1]);
-  }
-  player3color.getItem(0).setColorBackground(color(200));
-  player3color.getItem(0).setColorActive(colorArray[3]);
-  player3color.getItem(0).setColorForeground(colorArray[3]);
-  player3color.getItem(0).getCaptionLabel().setColor(colorArray[3]);
-  player3color.getItem(1).setColorBackground(color(200));
-  player3color.getItem(1).setColorActive(colorArray[4]);
-  player3color.getItem(1).setColorForeground(colorArray[4]);
-  player3color.getItem(1).getCaptionLabel().setColor(colorArray[4]);
-  player3color.getItem(2).setColorBackground(color(200));
-  player3color.getItem(2).setColorActive(colorArray[5]);
-  player3color.getItem(2).setColorForeground(colorArray[5]);
-  player3color.getItem(2).getCaptionLabel().setColor(colorArray[5]);
-  player3color.getItem(3).setColorBackground(color(200));
-  player3color.getItem(3).setColorActive(colorArray[6]);
-  player3color.getItem(3).setColorForeground(colorArray[6]);
-  player3color.getItem(3).getCaptionLabel().setColor(colorArray[6]);
-  
-  player4 = cp5.addTextfield("Player 4")
-          .setPosition(130, 475)
-          .setSize(160, 40)
-          .setFont(reg)
-          .setAutoClear(false)
-          .setColorBackground(colorArray[0])
-          .setColor(colorArray[0])
-          .setColorValueLabel(color(255))
-          .setColorCaptionLabel(colorArray[1]);
-  player4.getCaptionLabel().setFont(reg);
-  player4.getCaptionLabel().setSize(28);
-  player4.getValueLabel().setFont(reg);
-  player4.getValueLabel().setSize(28);
-  
-  player4color = cp5.addRadioButton("Player 4 Color")
-            .setNoneSelectedAllowed(false)
-            .setSize(100, 40)
-            .setSpacingColumn(0)
-            .setPosition(370, 475)
-            .setItemsPerRow(4)
-            .setColorLabel(color(255))
-            .addItem("R3", 0)
-            .addItem("B3", 1)
-            .addItem("O3", 2)
-            .addItem("W3", 3);
-  for (Toggle x:player4color.getItems()) {
-    x.getCaptionLabel().align(CENTER,CENTER);
-    x.getCaptionLabel().setFont(reg);
-    x.getCaptionLabel().setSize(24);
-    x.setSize(100, 40);
-    x.setColorBackground(colorArray[0]);
-    x.setColorActive(colorArray[1]);
-    x.setColorForeground(colorArray[1]);
-  }
-  player4color.getItem(0).setColorBackground(color(200));
-  player4color.getItem(0).setColorActive(colorArray[3]);
-  player4color.getItem(0).setColorForeground(colorArray[3]);
-  player4color.getItem(0).getCaptionLabel().setColor(colorArray[3]);
-  player4color.getItem(1).setColorBackground(color(200));
-  player4color.getItem(1).setColorActive(colorArray[4]);
-  player4color.getItem(1).setColorForeground(colorArray[4]);
-  player4color.getItem(1).getCaptionLabel().setColor(colorArray[4]);
-  player4color.getItem(2).setColorBackground(color(200));
-  player4color.getItem(2).setColorActive(colorArray[5]);
-  player4color.getItem(2).setColorForeground(colorArray[5]);
-  player4color.getItem(2).getCaptionLabel().setColor(colorArray[5]);
-  player4color.getItem(3).setColorBackground(color(200));
-  player4color.getItem(3).setColorActive(colorArray[6]);
-  player4color.getItem(3).setColorForeground(colorArray[6]);
-  player4color.getItem(3).getCaptionLabel().setColor(colorArray[6]);
   
   //music
   // Play music 
@@ -411,68 +200,11 @@ void showNew() {
   textFont(reg);
   textSize(20);
   cp5.show();
-  numPlayers.show();
   instr_new.changeVisibility(true);
   instr_new.update();
   play.changeVisibility(true);
   play.update();
   
-  if (numPlayers.getValue() == 0) {
-    player1.show();
-    player1color.hideLabels();
-    player1color.show();
-    player2color.hideLabels();
-    player2.hide();
-    player2color.hide();
-    player3.hide();
-    player3color.hideLabels();
-    player3color.hide();
-    player4.hide();
-    player4color.hideLabels();
-    player4color.hide();
-  }
-  else if (numPlayers.getValue() == 1) {
-    player1.show();
-    player1color.hideLabels();
-    player1color.show();
-    player2.show();
-    player2color.hideLabels();
-    player2color.show();
-    player3.hide();
-    player3color.hideLabels();
-    player3color.hide();
-    player4.hide();
-    player4color.hideLabels();
-    player4color.hide();
-  }
-  else if (numPlayers.getValue() == 2) {
-    player1.show();
-    player1color.hideLabels();
-    player1color.show();
-    player2.show();
-    player2color.hideLabels();
-    player2color.show();
-    player3.show();
-    player3color.hideLabels();
-    player3color.show();
-    player4.hide();
-    player4color.hideLabels();
-    player4color.hide();
-  }
-  else if (numPlayers.getValue() == 3) {
-    player1.show();
-    player1color.hideLabels();
-    player1color.show();
-    player2color.hideLabels();
-    player2.show();
-    player2color.show();
-    player3.show();
-    player3color.hideLabels();
-    player3color.show();
-    player4.show();
-    player4color.hideLabels();
-    player4color.show();
-  }
 }
 
 //everything for pause screen
@@ -583,24 +315,6 @@ void mousePressed() {
   }
   if (play.isOver()) {
     setup_done = true;
-    if (numPlayers.getValue() == 0) {
-      names[0] = player1.getText();
-    }
-    if (numPlayers.getValue() == 1) {
-      names[0] = player1.getText();
-      names[1] = player2.getText();
-    }
-    if (numPlayers.getValue() == 2) {
-      names[0] = player1.getText();
-      names[1] = player2.getText();
-      names[2] = player3.getText();
-    }
-    if (numPlayers.getValue() == 3) {
-      names[0] = player1.getText();
-      names[1] = player2.getText();
-      names[2] = player3.getText();
-      names[3] = player4.getText();
-    }
     state = game_screen;  
   }
   if (instr_game.isOver()) {
