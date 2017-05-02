@@ -13,13 +13,13 @@ class square {
   }
 
   void display() {
-    if (type=="Textbook") {
+    if (type=="Textbook") {//Textbook
       fill(255, 0, 0);
-    } else if (type=="Sleep") {
+    } else if (type=="Sleep") {//Sleep
       fill(0, 0, 255);
-    } else if (type=="Money") {
+    } else if (type=="Money") {//Money
       fill(0, 255, 0);
-    } else if (type=="Food") {
+    } else if (type=="Food") {//Food
       fill(0, 0, 0);
     } else {
       fill(255);
