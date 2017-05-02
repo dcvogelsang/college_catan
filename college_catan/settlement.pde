@@ -82,21 +82,17 @@ class settlement{
           for(int i = 0; i < 2; i++){
             tempS = b.Squares[5*(index+i) + 4];
             supplies.add(new resource(tempS.type));
-              print(tempS.type, 5*(index+i) + 4, " , ", x, y);
           }
       }
     }
     //middle of board
     if(100 < x && x < 600 && 100 < y && y < 600){
       index = int((y/100 - 2)*5 + x/100) - 2;
-      println(index);
         for(int i = 0; i < 2; i++){
           tempS = b.Squares[index + i];
           supplies.add(new resource(tempS.type));
-          print(tempS.type, index+i, " , ");
           tempS = b.Squares[index + 5 + i];
           supplies.add(new resource(tempS.type));
-          print(tempS.type, index+i + 5);
         }
       
     }
