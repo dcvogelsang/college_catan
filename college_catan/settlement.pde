@@ -16,6 +16,7 @@ class settlement{
   
   void display(){
     rectMode(CENTER);
+    fill(c);
     rect(x, y, 30, 30); 
     if(level == 2){//upgraded visual for cities
       fill(c);

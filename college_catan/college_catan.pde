@@ -24,6 +24,7 @@ int state = main_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BA
 
 boolean setup_done = false; //will be changed to true once setup is done
 int roll_value; //for the dice roll
+int totalPlayers;
 
 //Board
 board b;
@@ -72,9 +73,8 @@ void setup() {
   logo = loadImage("settlers.png");
   
   b = new board();
-  names = new String[4];
-  playerColors = new color[4];
-  compete = new Competitors(names, playerColors);
+  
+  //compete = new Competitors(names, playerColors);
   
   //button setups
   start = new Button(colorArray[0], width/2, height/3 * 2, 180, 90, "New Game", 32);
@@ -584,6 +584,7 @@ void showGame() {
   //display player name?
   b.display();
   compete.update();
+  
 }
 
 
@@ -704,16 +705,25 @@ void mousePressed() {
   if (play.isOver()) {
     setup_done = true;
     if (numPlayers.getValue() == 0) {
+      names = new String[1];
+      playerColors = new color[1];
+      totalPlayers = 1;
       names[0] = player1.getText();
       playerColors[0] = colorArray[assignColors(player1color.getValue())];
     }
     if (numPlayers.getValue() == 1) {
+      names = new String[2];
+      playerColors = new color[2];
+      totalPlayers = 2;
       names[0] = player1.getText();
       names[1] = player2.getText();
       playerColors[0] = colorArray[assignColors(player1color.getValue())];
       playerColors[1] = colorArray[assignColors(player2color.getValue())];
     }
     if (numPlayers.getValue() == 2) {
+      names = new String[3];
+      playerColors = new color[3];
+      totalPlayers = 3;
       names[0] = player1.getText();
       names[1] = player2.getText();
       names[2] = player3.getText();
@@ -722,6 +732,9 @@ void mousePressed() {
       playerColors[2] = colorArray[assignColors(player3color.getValue())];
     }
     if (numPlayers.getValue() == 3) {
+      names = new String[4];
+      playerColors = new color[4];
+      totalPlayers = 4;
       names[0] = player1.getText();
       names[1] = player2.getText();
       names[2] = player3.getText();
@@ -731,6 +744,7 @@ void mousePressed() {
       playerColors[2] = colorArray[assignColors(player3color.getValue())];
       playerColors[3] = colorArray[assignColors(player4color.getValue())];
     }
+    compete = new Competitors(names, playerColors);
     state = game_screen;  
   }
   if (instr_game.isOver()) {
@@ -741,6 +755,8 @@ void mousePressed() {
   }
   if (roll.isOver()) {
     rollDice();
+    compete.nextTurn();
+    println(compete.cPlayer.player_color);
     state = game_screen;  
   }
 }

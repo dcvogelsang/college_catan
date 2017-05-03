@@ -13,9 +13,10 @@ class city{
   
   void display(){
     rectMode(CENTER);
+    fill(c);
     rect(x, y, 30, 30); 
     if(level == 2){//upgraded visual for cities
-      fill(c);
+      fill(0);
       ellipse(x, y, 10, 10);
     }
     fill(c);
