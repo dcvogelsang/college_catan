@@ -23,6 +23,7 @@ final int end_screen = 5; //for game results and restart game
 int state = main_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BACK TO MAIN_SCREEN
 
 boolean setup_done = false; //will be changed to true once setup is done
+int roll_value; //for the dice roll
 
 //Board
 board b;
@@ -44,6 +45,7 @@ Button smol_exit; //smol exit button
 Button play; //button from new screen to start game
 Button instr_game; //instructions button from game screen
 Button next_turn; //next turn button from game screen
+Button roll; //roll button for next player
 
 RadioButton numPlayers; //radio button list for number of players
 RadioButton player1color; //radio button list for player1 color
@@ -83,6 +85,7 @@ void setup() {
   play = new Button(colorArray[0], width/2, height/4 * 3.5, 180, 90, "Play Game", 32);
   instr_game = new Button(colorArray[0], 750, 700, 150, 60, "Instructions", 28);
   next_turn = new Button(colorArray[0], 750, 625, 150, 60, "Next Player", 28);
+  roll = new Button(colorArray[0], width/2, height/3 * 2, 180, 90, "Roll", 32);
   
    cp5 = new ControlP5(this);
    numPlayers = cp5.addRadioButton("Players")
@@ -538,6 +541,39 @@ void showGame() {
   play.changeVisibility(false);
   back.changeVisibility(false);
   smol_exit.changeVisibility(false);
+  roll.changeVisibility(false);
+  
+  rectMode(CENTER);
+  fill(colorArray[1]);
+  rect(750, 100, 150, 60, 8);
+  fill(color(255));
+  textAlign(CENTER, CENTER);
+  textFont(header);
+  textSize(28);
+  text("Roll: " + roll_value, 750, 100);
+  
+  //inner red square
+  noStroke();
+  fill(colorArray[0]);
+  rect(750, 365, 265, 375);
+  
+  //inner yellow square
+  strokeWeight(4);
+  stroke(colorArray[1]);
+  fill(colorArray[2]);
+  rect(750, 365, 240, 350);
+  
+  //instruction card
+  textAlign(CENTER, CENTER);
+  fill(colorArray[0]);
+  textFont(header, 28);
+  text("RESOURCES", 750, 220);
+  textAlign(LEFT);
+  fill(colorArray[1]);
+  textFont(header, 20);
+  text("1 road = sleep + textbook", 645, 275);
+  text("1 dorm = food + sleep\n         + money + textbook    ", 645, 325);
+  text("1 apt = 2 food + 3 money", 645, 400);
   
   textFont(reg);
   instr_game.changeVisibility(true);
@@ -545,7 +581,7 @@ void showGame() {
   next_turn.changeVisibility(true);
   next_turn.update();
   
-  
+  //display player name?
   b.display();
   compete.update();
 }
@@ -553,13 +589,77 @@ void showGame() {
 
 //everything for transition screen between players
 void showTransition() {
-//transition screen with a "I'm ready" button  
+  background(color(240));
+  
+  cp5.hide();
+  instr_game.changeVisibility(false);
+  next_turn.changeVisibility(false);
+  
+  //inner red square
+  rectMode(CENTER);
+  noStroke();
+  fill(colorArray[0]);
+  rect(width/2, height/2, 775, 775);
+  
+  //inner yellow square
+  strokeWeight(4);
+  stroke(colorArray[1]);
+  fill(colorArray[2]);
+  rect(width/2, height/2, 725, 725);
+  
+  textAlign(CENTER, CENTER);
+  fill(colorArray[0]);
+  textFont(header, 50);
+  text("NEXT TURN", width/2, height/3);
+  fill(color(0));
+  textFont(reg, 38);
+  text("When the next player is ready, click roll.", width/2, height/3 + 100);
+  
+  roll.changeVisibility(true);
+  roll.update();
+  
 }
 
 //everythng for the end screen
 void showEnd() {
-//results and option to restart or exit  
+  cp5.hide();
+  instr_game.changeVisibility(false);
+  next_turn.changeVisibility(false);
+  roll.changeVisibility(false);
+  background(color(240));
+  
+  //inner red square
+  rectMode(CENTER);
+  noStroke();
+  fill(colorArray[0]);
+  rect(width/2, height/2, 775, 775);
+  
+  //inner yellow square
+  strokeWeight(4);
+  stroke(colorArray[1]);
+  fill(colorArray[2]);
+  rect(width/2, height/2, 725, 725);
+  
+  textAlign(CENTER, CENTER);
+  fill(colorArray[0]);
+  textFont(header, 50);
+  text("GAME OVER", width/2, height/3);
+  
+  textFont(reg);
+  start.changeVisibility(true);
+  start.update();
+  exit.changeVisibility(true);
+  exit.update();
 
+}
+
+//method for dice roll
+int rollDice() {
+  roll_value = 0;
+  int die_one = (int) (Math.random() * 6) + 1;
+  int die_two = (int) (Math.random() * 6) + 1;
+  roll_value = die_one + die_two;
+  return roll_value;
 }
 
 //method for assigning player colors
@@ -630,7 +730,6 @@ void mousePressed() {
       playerColors[1] = colorArray[assignColors(player2color.getValue())];
       playerColors[2] = colorArray[assignColors(player3color.getValue())];
       playerColors[3] = colorArray[assignColors(player4color.getValue())];
-      println(playerColors);
     }
     state = game_screen;  
   }
@@ -639,6 +738,10 @@ void mousePressed() {
   }
   if (next_turn.isOver()) {
     state = transition_screen;  
+  }
+  if (roll.isOver()) {
+    rollDice();
+    state = game_screen;  
   }
 }
 
