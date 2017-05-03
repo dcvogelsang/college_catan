@@ -3,7 +3,6 @@ class square {
   float s;
   String type;
   int total;
-  PImage img;
   String imageName;
 
   square(float _x, float _y, 
@@ -17,25 +16,31 @@ class square {
 
   void display() {
     if (type=="Textbook") {//Textbook
-      fill(255, 0, 0);
-      //imageName = "textbooks.jpg";
+      //fill(0, 0, 255);
+      imageName = "textbooks.jpg";
     } else if (type=="Sleep") {//Sleep
-      fill(0, 0, 255);
-      //imageName = "sleep.jpg";
+      //fill(0, 0, 255);
+      imageName = "sleep.jpg";
     } else if (type=="Money") {//Money
-      fill(0, 255, 0);
-      //imageName = "money.jpeg";
+      //fill(0, 255, 0);
+      imageName = "money.jpeg";
     } else if (type=="Food") {//Food
-      fill(0, 0, 0);
-      //imageName = "food.jpg";
+      //fill(0, 0, 0);
+      imageName = "food.jpg";
     } else {
-      fill(255);
-      //imageName = "desert.jpg";
+      //fill(255);
+      imageName = "desert.jpg";
     }
-    //img = loadImage(imageName);
-    //image(img,x,y,s,s);
     rect(x, y, s, s);
+    PImage img = loadImage(imageName);
+    beginShape();
+    texture(img);
+    vertex(x+1, y,0,0);
+    vertex(x+s-1, y,100,0);
+    vertex(x+s-1, y+s,100,100);
+    vertex(x+1, y+s,0,100);
+    endShape();
     fill(255);
-    text(total,x+45,y+55);
+    text(total, x+45, y+55);
   }
 }
