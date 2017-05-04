@@ -11,6 +11,9 @@ class resource {
 
   void display(float x) {
     //x = index of card in Player's resource deck
-    image(card, 100*x + 20, height - 150, 75, 100);
+    //image(card, 100*x + 20, height - 150, 75, 100);
+    
+    
+    
   }
 }

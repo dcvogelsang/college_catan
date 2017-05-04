@@ -1,7 +1,7 @@
 class Player{
   String name;
   color player_color;
-  ArrayList<resource> resources;//list of resources owned by Player
+  int[] resources = {2, 2, 2, 2};//list of resources owned by Player
   ArrayList<settlement> built;//list of settlements owned by Player
   ArrayList<road> bRoad;//list of roads owned by Player
   ArrayList<city> bCity;//list of roads owned by Player
@@ -13,7 +13,6 @@ class Player{
     //mClick = false;
     player_color = c;
     name = n;
-    resources = new ArrayList<resource>();
     built = new ArrayList<settlement>();
     bCity = new ArrayList<city>();
     bRoad = new ArrayList<road>();
@@ -31,10 +30,20 @@ class Player{
     for(city c: bCity){
       c.display();
     }
-    for(int i = 0; i < resources.size(); i++){
-      resource re = resources.get(i);
-      re.display(i);
-    }
+    fill(255);
+    image(loadImage("Food.gif"), 200 + 20, height - 90, 75, 100);
+    rect(211, height - 30, 15, 15);
+    image(loadImage("Money.gif"), 300 + 20, height - 90, 75, 100);
+    rect(311, height - 30, 15, 15);
+    image(loadImage("Sleep.gif"), 400 + 20, height - 90, 75, 100);
+    rect(411, height - 30, 15, 15);
+    image(loadImage("Textbook.gif"), 500 + 20, height - 90, 75, 100);
+    rect(511, height - 30, 15, 15);
+    fill(0);
+    text(resources[0], 211, height - 30);
+    text(resources[1], 311, height - 30);
+    text(resources[2], 411, height - 30);
+    text(resources[3], 511, height - 30);
     
   }
   
@@ -56,9 +65,7 @@ class Player{
               settlement tempSettle = new settlement(1, testX, testY, player_color);
               built.add(tempSettle); 
               points += 1;
-              for(int i = 0; i < tempSettle.supplies.size(); i++){
-                resources.add(tempSettle.supplies.get(i));
-              }
+              
             }
           }
           //mClick = true;
