@@ -29,7 +29,7 @@ class square {
       imageName = "food.jpg";
     } else {
       //fill(255);
-      imageName = "desert.jpg";
+      imageName = "desert.gif";
     }
     rect(x, y, s, s);
     PImage img = loadImage(imageName);
@@ -40,7 +40,7 @@ class square {
     vertex(x+s-1, y+s,100,100);
     vertex(x+1, y+s,0,100);
     endShape();
-    fill(255);
+    fill(colorArray[0]);
     text(total, x+45, y+55);
   }
 }

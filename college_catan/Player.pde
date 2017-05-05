@@ -21,6 +21,8 @@ class Player{
  
   void display(){//displays the player's objects and resources owned
     
+    
+    
     for(road r: bRoad){
       r.display();
     }
@@ -30,20 +32,9 @@ class Player{
     for(city c: bCity){
       c.display();
     }
-    fill(255);
-    image(loadImage("Food.gif"), 200 + 20, height - 90, 75, 100);
-    rect(211, height - 30, 15, 15);
-    image(loadImage("Money.gif"), 300 + 20, height - 90, 75, 100);
-    rect(311, height - 30, 15, 15);
-    image(loadImage("Sleep.gif"), 400 + 20, height - 90, 75, 100);
-    rect(411, height - 30, 15, 15);
-    image(loadImage("Textbook.gif"), 500 + 20, height - 90, 75, 100);
-    rect(511, height - 30, 15, 15);
-    fill(0);
-    text(resources[0], 211, height - 30);
-    text(resources[1], 311, height - 30);
-    text(resources[2], 411, height - 30);
-    text(resources[3], 511, height - 30);
+    
+    
+    
     
   }
   

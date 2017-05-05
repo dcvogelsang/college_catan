@@ -127,7 +127,7 @@ void setup() {
     .setAutoClear(false)
     .setColorBackground(colorArray[0])
     .setColor(colorArray[0])
-    .setColorValueLabel(color(255))
+    .setColorValueLabel(colorArray[1])
     .setColorCaptionLabel(colorArray[1]);
   player1.getCaptionLabel().setFont(reg);
   player1.getCaptionLabel().setSize(28);
@@ -178,7 +178,7 @@ void setup() {
     .setAutoClear(false)
     .setColorBackground(colorArray[0])
     .setColor(colorArray[0])
-    .setColorValueLabel(color(255))
+    .setColorValueLabel(colorArray[1])
     .setColorCaptionLabel(colorArray[1]);
   player2.getCaptionLabel().setFont(reg);
   player2.getCaptionLabel().setSize(28);
@@ -229,7 +229,7 @@ void setup() {
     .setAutoClear(false)
     .setColorBackground(colorArray[0])
     .setColor(colorArray[0])
-    .setColorValueLabel(color(255))
+    .setColorValueLabel(colorArray[1])
     .setColorCaptionLabel(colorArray[1]);
   player3.getCaptionLabel().setFont(reg);
   player3.getCaptionLabel().setSize(28);
@@ -280,7 +280,7 @@ void setup() {
     .setAutoClear(false)
     .setColorBackground(colorArray[0])
     .setColor(colorArray[0])
-    .setColorValueLabel(color(255))
+    .setColorValueLabel(colorArray[1])
     .setColorCaptionLabel(colorArray[1]);
   player4.getCaptionLabel().setFont(reg);
   player4.getCaptionLabel().setSize(28);
@@ -700,6 +700,7 @@ int assignColors(float x) {
 }
 
 
+
 //method for button functions
 void mousePressed() {
   if (start.isOver()) {
@@ -765,6 +766,7 @@ void mousePressed() {
       playerColors[3] = colorArray[assignColors(player4color.getValue())];
     }
     compete = new Competitors(names, playerColors);
+    rollDice();
     state = game_screen;
   }
   if (instr_game.isOver()) {
