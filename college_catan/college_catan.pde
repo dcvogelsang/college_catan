@@ -545,7 +545,7 @@ void showPause() {
   textFont(header, 32);
   text("Rules:", width/2, height/8 * 5 - 25);
   textFont(reg, 24);
-  text("Dorms + apartments must be at least 2 roads away from each other.\nBuildings have different Victory Point values.\nThe first player to collect 6 Victory Points wins!", width/2, height/8 * 5 + 45);
+  text("Dorms + apartments must be at least 1 road away from each other.\nBuildings have different Victory Point values.\nThe first player to collect 6 Victory Points wins!", width/2, height/8 * 5 + 45);
   textFont(header, 32);
   text("Note:", width/2, height/8 * 6.5 - 25);
   textFont(reg, 24);
