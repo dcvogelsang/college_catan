@@ -40,6 +40,10 @@ class square {
     vertex(x+s-1, y+s,100,100);
     vertex(x+1, y+s,0,100);
     endShape();
+    fill(255);
+    noStroke();
+    ellipse(x+45,y+55,40,40);
+    stroke(1);
     fill(colorArray[0]);
     text(total, x+45, y+55);
   }

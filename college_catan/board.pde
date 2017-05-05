@@ -40,14 +40,14 @@ class board {
   }
  
   boolean correctX() {
-    if ((mouseX % 100) < 10 || (mouseX % 100) > 90) {
+    if (((mouseX % 100) < 10 || (mouseX % 100) > 90) && mouseX >= 80 && mouseX <= 620) {
       return true;
     }
     return false;
   }
 
   boolean correctY() {
-    if ((mouseY % 100) < 10 || (mouseY % 100) > 90) {
+    if (((mouseY % 100) < 10 || (mouseY % 100) > 90) && mouseY >= 80 && mouseY <= 620) {
       return true;
     }
     return false;
