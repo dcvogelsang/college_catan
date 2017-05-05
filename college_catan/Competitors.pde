@@ -54,7 +54,6 @@ class Competitors{
       count=0;
       cPlayer=Players.get(count);
     }
-    println(count);
   }
   
   

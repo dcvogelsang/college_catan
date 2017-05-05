@@ -30,6 +30,8 @@ int state = main_screen; //CAN TEST STATES HERE, BUT BEFORE WE SUBMIT, CHANGE BA
 boolean setup_done = false; //will be changed to true once setup is done
 int roll_value; //for the dice roll
 int totalPlayers;
+int win_condition = 6; //number of victory points required for winning
+boolean win=false;
 
 //Board
 board b;
@@ -535,19 +537,19 @@ void showPause() {
   textFont(header, 32);
   text("Setup:", width/2, height/8 + 35);
   textFont(reg, 24);
-  text("1. Each player enters a name and selects a color.\n2. Players each place 2 roads + 2 dorms in a random order.\n3. Players receive resources for the dorms they place.", width/2, height/8 + 105);
+  text("1. Each player enters a name and selects a color.\n2. Players receive 2 of each resource to start with.", width/2, height/8 + 105);
   textFont(header, 32);
   text("Gameplay By Turn:", width/2, height/8 * 3 - 15);
   textFont(reg, 24);
-  text("1. Roll die.\n2. Collect resources for the dorms + apartments.\n3. [OPTIONAL] Trade 4 of the same resource for 1 from the bank.\n4. [OPTIONAL] Build according to the resource card.", width/2, height/8 * 4 - 25);
+  text("1. Roll die.\n2. Collect resources for the dorms + apartments.\n3. [OPTIONAL] Build according to the resource card.", width/2, height/8 * 4 - 25);
   textFont(header, 32);
   text("Rules:", width/2, height/8 * 5 - 25);
   textFont(reg, 24);
-  text("Dorms + apartments must be at least 2 roads away from each other.\nBuildings have different Victory Point values.\nThe first player to collect 10 Victory Points wins!", width/2, height/8 * 5 + 45);
+  text("Dorms + apartments must be at least 2 roads away from each other.\nBuildings have different Victory Point values.\nThe first player to collect 6 Victory Points wins!", width/2, height/8 * 5 + 45);
   textFont(header, 32);
   text("Note:", width/2, height/8 * 6.5 - 25);
   textFont(reg, 24);
-  text("When 7 is rolled, the player places the Midterm.\nResources under the Midterm cannot be collected.", width/2, height/8 * 7 - 25);
+  text("Press 1 to build a dorm, 2 to build an apartment, 3 to build a road.\nPress m to mute the music.", width/2, height/8 * 7 - 25);
 
   textFont(reg);
   back.changeVisibility(true);
@@ -596,7 +598,7 @@ void showGame() {
   fill(colorArray[1]);
   textFont(header, 20);
   text("1 road = sleep + textbook", 645, 275);
-  text("1 dorm = food + sleep\n         + money + textbook    ", 645, 325);
+  text("1 dorm = food + sleep\n               + money", 645, 325);
   text("1 apt = 2 food + 3 money", 645, 400);
 
   textFont(reg);
@@ -605,9 +607,14 @@ void showGame() {
   next_turn.changeVisibility(true);
   next_turn.update();
 
-  //display player name?
   b.display();
   compete.update();
+  
+  //win condition
+  winning();
+  if (win== true) {
+    state = end_screen;  
+  }
 }
 
 
@@ -700,6 +707,59 @@ int assignColors(float x) {
 }
 
 
+void distribute(){
+  for (Player q: compete.Players){
+    for (settlement s: q.built){
+      for (square t: s.supplies){
+        if (roll_value==t.total){
+          if (t.type=="Food"){
+            q.resources[0]+=1;
+          }
+          else if (t.type=="Money"){
+            q.resources[1]+=1;
+          }
+          else if (t.type=="Sleep"){
+            q.resources[2]+=1;
+          }
+          else if (t.type=="Textbook"){
+            q.resources[3]+=1;
+          }
+        }
+      }
+    }
+     for (city c: q.bCity){
+      for (square t: c.supplies){
+        if (roll_value==t.total){
+          if (t.type=="Food"){
+            q.resources[0]+=1;
+          }
+          else if (t.type=="Money"){
+            q.resources[1]+=1;
+          }
+          else if (t.type=="Sleep"){
+            q.resources[2]+=1;
+          }
+          else if (t.type=="Textbook"){
+            q.resources[3]+=1;
+          }
+        }
+      }
+    }
+  }
+  
+}
+
+void winning(){
+  for(Player q: compete.Players){
+    if(q.points>=win_condition){
+      win= true;
+    }
+    else{
+      win=false;
+    }
+  }
+}
+
 
 //method for button functions
 void mousePressed() {
@@ -778,7 +838,7 @@ void mousePressed() {
   if (roll.isOver()) {
     rollDice();
     compete.nextTurn();
-    println(compete.cPlayer.player_color);
+    distribute();
     state = game_screen;
   }
 }
