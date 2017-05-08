@@ -12,3 +12,5 @@ Game will end when any player collects 6 Victory Points.
 
 Mute the sound by pressing “m” at any point.
 To build, press “1” and click on an intersection for a dorm. Press “2” and click on a dorm to upgrade the dorm to an apartment. Press “3” and click on a segment to build a road.
+
+Note: There may be a slight lag with mouse movement.
