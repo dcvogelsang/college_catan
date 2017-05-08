@@ -1,0 +1,55 @@
+﻿College Catan
+
+Our project is modeled off of the board game Settlers of Catan. However, we modified it to be college-themed. We simplified the original Catan gameplay to fit within the scope of this project. The game is based on a “hotseat” system where players just take turns in front of the computer to play.
+
+
+Functionalities and Implementations
+
+Keyboard Interactivity: On the setup screen, the user will input their player’s name as text. The players will also use the keys “1,” “2,” and “3,” to build dorms, apartments, and roads, respectively.
+
+Multiple GUI Systems: Main menu to select “New Game” or “Exit”; setup menu to choose the number of players, enter player names, and select a player color; pause/instructions menu during setup and during the game with options to go “Back” or “Exit”; player transition screen between turns; end screen when a player has won and “New Game” or “Exit”
+
+Class Object with Animation Hierarchies: Our cursor follows the user’s cursor on the screen, with fading, different-sized ellipses as a trail.
+
+Data Input: We created a custom tile class that uses select images as a texture input. These tiles are used to represent the various resources that exist in the game. 
+
+Sound: There is background game music that plays throughout the game. Players can press “m” at any point to mute the sound.
+
+
+Classes
+
+College_catan: Main class with most of the GUI functionality.
+
+Button: Class for creating buttons.
+
+Competitors: The class the main “College_catan” class interacts with. Competitors has an ArrayList of Players which is manipulated to handle what happens and what is displayed during each player’s turn.
+
+Player: Each Player has an ArrayList of resources, roads, settlements, and cities. These are updated as needed according to player activity each frame. Examples of player activity include a die roll and any build commands. The Player class also hosts methods to check whether or not a settlement, city, or road can be built at the location a user selects (bExist(), cExist(), and rExist() respectively). The turn() method currently only calls upon build(), but could call upon more functions in the future as the game is updated to have more complex functions, such as trading.
+
+Board: The board class create the board as a 5x5 aggregation of the square tiles, which is where the player is able to place down roads, dorms,and apartments.
+
+Square: This class is a square tile that is 100 pixels by 100 pixels and contains the type that they are (textbook, food,sleep, money, or desert),as well as their value, all of which is randomly assigned at the beginning of the game
+
+settlement: This class contains the location, associated Player’s color, and an ArrayList of all adjacent “square” objects named supplies. The settlement class also implements a “determineSupplies” method that populates the “supplies” ArrayList.
+
+city: Similar to the settlement class but displays an extra dot on the settlement to distinguish the upgrade from a settlement to a city. This class contains the location, associated Player’s color, and an ArrayList of all adjacent “square” objects named supplies. The city class also implements a “determineSupplies” method that populates the “supplies” ArrayList.
+
+Resource: The resource class holds the name and type of a resource, both as String variables.
+
+Road: This class is used for the creation of the “road” structure in the game. It is called in the Player class through the build() method. This method is used whenever a player decides to build a structure. The road class also has the functionality to know whether or not to draw a vertical or horizontal road depending upon the x and y coordinates of the mouse cursor. 
+
+
+Unexpected Challenges
+
+Since the functionality of the game is so interconnected, it was difficult to work on parts separately and we often had to meet with a majority of the group present to code. The actual board game also involves many more rules than we were able to implement/code for. Thus, we left out some requirements (i.e. players must all choose different colors, settlements can only be built next to a player’s roads).
+
+
+Work Breakdown
+
+1. Ashley worked on the GUI systems and screens. She implemented the main menu, setup menu, pause/instruction menu, and the end screen. She also helped with the final implementation.
+
+2. Emily worked on player functionality in the Player and Competitors classes. This included integrating settlement, city, road, resource, and board functionality together. Emily also created the resource cards. (Fun fact: There is a Catan pictured in the upper left corner of the Textbooks picture.)
+
+3. Alex worked on creating the squares used to create the board & game pieces. He also worked to helped implement various helper functions that tied the game together.
+
+4. Drew worked on various systems while assisting the rest of the group on different functions and methods as needed. Some of the systems he worked on was the creation of the animated mouse cursor and the implementation of the texture system on the board’s tiles.
