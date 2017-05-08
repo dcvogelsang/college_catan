@@ -79,7 +79,7 @@ void setup() {
   textFont(header, 48);
   logo = loadImage("settlers.png");
   
-  // reset all the numbers in both arrays
+  // reset all the numbers in both arrays (for cursor)
   for(int i = 0; i<m.length; i++) {
     m[i] = 0;
     n[i] = 0; 
@@ -359,25 +359,7 @@ void draw() {
     showEnd(); //show end screen at the end of a game
     break;
   }
-  //PImage cursr = loadImage("pencil.png");
-  //cursor(cursr);
-  noCursor();
-  noStroke();
-  for (int i = 0; i<m.length-1; i++) {
-    // and shift all the values down one item
-    m[i] = m[i+1];
-    n[i] = n[i+1]; 
-
-    // set the fill colour to be darker the 
-    // lower its index in the array
-    fill(colorArray[1]-i/2);
-    // and draw the circle at the position
-    ellipse(m[i], n[i], i/2, i/2);
-  }
-
-  // set the last items in the array to match the mouse position
-  m[m.length-1] = mouseX; 
-  n[n.length-1] = mouseY;
+  cursorDisplay();
 
 }
 
